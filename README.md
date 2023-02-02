@@ -43,4 +43,4 @@ To build the project, run:
 To deploy the projec to AWS, run:
 
  - npm i
- - sls deploy
+ - npx sls deploy
