@@ -8,7 +8,7 @@ It is designed to be run as an AWS Lambda and comes packaged with Bitbucket Pipe
 
 When the API is hit, it will send a text message (SMS) and an email to the email address and phone number specified in serverless.yml.
 
-The API accepts POST requests and the expected inputs are are follows:
+The API accepts POST requests and the expected inputs are as follows:
 
 
 URI: /contact
