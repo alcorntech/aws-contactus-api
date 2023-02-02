@@ -28,22 +28,19 @@ VALUES:
 
 To run the project, run:
 
-npm i
-
-npm start
+ - npm i
+ - npm start
 
 --- 
 
 To build the project, run:
 
-npm i
-
-npx sls package
+ - npm i
+ - npx sls package
 
 ---
 
 To deploy the projec to AWS, run:
 
-npm i
-
-sls deploy
+ - npm i
+ - sls deploy
