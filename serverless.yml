@@ -1,0 +1,48 @@
+service: alcorntech-api
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: false
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  lambdaHashingVersion: 20201221
+  memorySize: 128 # Overwrite the default memory size. Default is 1024
+  apiGateway:
+    minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+    shouldStartNameWithService: true
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+    CONTACT_EMAIL_TO: 'support@alcorntech.com'
+    CONTACT_EMAIL_FROM: 'support@alcorntech.com'
+    CONTACT_EMAIL_SUBJECT: 'Alcorn Technologies Contact Form'
+    CONTACT_SMS_TO: '+18125899118'
+  deploymentBucket:
+    name: 'alcorntech-api'
+    blockPublicAccess: true
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "SES:SendEmail"
+      Resource:
+        - "*"
+    - Effect: "Allow"
+      Action:
+        - "SNS:Publish"
+      Resource:
+        - "*"
+    
+functions:
+  app:
+    handler: src/app.handler
+    events:
+      - http: ANY /
+      - http: 'ANY /{proxy+}'

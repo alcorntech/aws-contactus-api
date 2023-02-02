@@ -1,0 +1,13 @@
+Alcorn Technologies Contact Form
+
+Full Name: {{full_name}}
+
+Email Address: {{email_address}}
+
+Phone Number: {{phone_number}}
+
+Zip Code: {{zip_code}}
+
+Message: {{message}}
+
+IP Address: {{ip_address}}

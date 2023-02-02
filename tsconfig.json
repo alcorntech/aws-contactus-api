@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017", "dom"],
+    "removeComments": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "target": "es2017",
+    "outDir": "lib",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "alwaysStrict": true
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*"
+  ]
+}
