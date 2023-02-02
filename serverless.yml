@@ -1,4 +1,4 @@
-service: alcorntech-api
+service: aws-contactus-api
 
 custom:
   webpack:
@@ -26,7 +26,7 @@ provider:
     CONTACT_EMAIL_SUBJECT: 'subject'
     CONTACT_SMS_TO: 'phone number'
   deploymentBucket:
-    name: 'alcorntech-api'
+    name: 'aws-contactus-api'
     blockPublicAccess: true
   iamRoleStatements:
     - Effect: "Allow"

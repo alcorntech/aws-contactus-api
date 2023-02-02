@@ -1,4 +1,4 @@
-Alcorn Technologies Contact Form
+Website Contact Form
 
 Full Name: {{full_name}}
 

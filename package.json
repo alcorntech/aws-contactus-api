@@ -1,5 +1,5 @@
 {
-  "name": "alcorntech-api",
+  "name": "aws-contactus-api",
   "version": "1.0.0",
   "scripts": {
     "start": "serverless offline start",
