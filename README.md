@@ -29,6 +29,7 @@ VALUES:
 To run the project, run:
 
 npm i
+
 npm start
 
 --- 
@@ -36,6 +37,7 @@ npm start
 To build the project, run:
 
 npm i
+
 npx sls package
 
 ---
@@ -43,4 +45,5 @@ npx sls package
 To deploy the projec to AWS, run:
 
 npm i
+
 sls deploy
