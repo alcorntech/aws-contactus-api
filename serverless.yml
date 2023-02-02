@@ -21,10 +21,10 @@ provider:
     shouldStartNameWithService: true
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
-    CONTACT_EMAIL_TO: 'support@alcorntech.com'
-    CONTACT_EMAIL_FROM: 'support@alcorntech.com'
-    CONTACT_EMAIL_SUBJECT: 'Alcorn Technologies Contact Form'
-    CONTACT_SMS_TO: '+18125899118'
+    CONTACT_EMAIL_TO: 'email@domain.com'
+    CONTACT_EMAIL_FROM: 'email@domain.com'
+    CONTACT_EMAIL_SUBJECT: 'subject'
+    CONTACT_SMS_TO: 'phone number'
   deploymentBucket:
     name: 'alcorntech-api'
     blockPublicAccess: true
