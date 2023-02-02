@@ -12,7 +12,9 @@ The API accepts POST requests and the expected inputs are are follows:
 
 
 URI: /contact
+
 METHOD: POST
+
 VALUES:
  - full_name
  - email_address
