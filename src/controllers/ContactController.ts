@@ -42,14 +42,12 @@ export class ContactController
         zip_code: request.body.zip_code,
         message: request.body.message,
         ip_address: request.ip,
+        captcha_token: request.body.captcha_token,
       });
 
       // Validate captcha (if applicable)
       if (process.env.GOOGLE_RECAPTCHA_SECRET) {
-        const isValid = await this.captchaService.validate({
-          token: request.body.captchaToken,
-          ipAddress: request.ip,
-        });
+        const isValid = await this.captchaService.validate(model);
 
         if (!isValid) {
           throw Constants.ApiErrors.Forbidden;

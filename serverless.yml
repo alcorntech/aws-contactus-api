@@ -1,4 +1,4 @@
-service: aws-contactus-api
+service: alcorntech-api
 
 custom:
   webpack:
@@ -27,7 +27,7 @@ provider:
     CONTACT_EMAIL_SUBJECT: 'Website Contact Form'
     CONTACT_SMS_TO: 'E.164 Phone Number'
     GOOGLE_RECAPTCHA_SECRET: 'Google Recaptcha Secret Key'
-    GOOGLE_RECAPTURE_SCORE_MIN: 0.5
+    GOOGLE_RECAPTCHA_SCORE_MIN: 0.5
   deploymentBucket:
     name: 'serverless-lambdas-bucket'
     blockPublicAccess: true

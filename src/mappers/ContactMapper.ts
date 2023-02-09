@@ -14,7 +14,8 @@ export class ContactMapper implements IMapperBase<ContactModel, ContactDto> {
           model.phoneNumber,
           model.zipCode,
           model.message,
-          model.ipAddress
+          model.ipAddress,
+          model.captchaToken
         )
       );
     });
@@ -29,7 +30,8 @@ export class ContactMapper implements IMapperBase<ContactModel, ContactDto> {
           dto.phone_number,
           dto.zip_code,
           dto.message,
-          dto.ip_address
+          dto.ip_address,
+          dto.captcha_token
         )
       );
     });

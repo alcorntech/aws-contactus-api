@@ -13,13 +13,16 @@ export class ContactModel {
 
   ipAddress: string;
 
+  captchaToken: string;
+
   constructor(
     fullName = '',
     emailAddress = '',
     phoneNumber = '',
     zipCode = '',
     message = '',
-    ipAddress = ''
+    ipAddress = '',
+    captchaToken = ''
   ) {
     this.fullName = fullName;
     this.emailAddress = emailAddress;
@@ -27,5 +30,6 @@ export class ContactModel {
     this.zipCode = zipCode;
     this.message = message;
     this.ipAddress = ipAddress;
+    this.captchaToken = captchaToken;
   }
 }

@@ -1,14 +1,14 @@
 'use strict';
 
 import { injectable } from 'inversify';
-import { CaptchaModel } from '../models/CaptchaModel';
+import { ContactModel } from '../models/ContactModel';
 import { ICaptchaService } from '../serviceInterfaces/ICaptchaService';
 
 @injectable()
 export class RecaptchaService implements ICaptchaService {
-  public async validate(params: CaptchaModel): Promise<boolean> {
+  public async validate(params: ContactModel): Promise<boolean> {
     const response: Response = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GOOGLE_RECAPTCHA_SECRET}&response=${params.token}&remoteip=${params.ipAddress}`,
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GOOGLE_RECAPTCHA_SECRET}&response=${params.captchaToken}&remoteip=${params.ipAddress}`,
       {
         method: 'POST',
       }
@@ -18,7 +18,7 @@ export class RecaptchaService implements ICaptchaService {
 
     if (!responseJson.success) {
       return false;
-    } else if (responseJson.score < process.env.GOOGLE_RECAPTURE_SCORE_MIN) {
+    } else if (responseJson.score < process.env.GOOGLE_RECAPTCHA_SCORE_MIN) {
       return false;
     }
 

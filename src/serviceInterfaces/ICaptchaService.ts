@@ -1,7 +1,7 @@
 'use strict';
 
-import { CaptchaModel } from '../models/CaptchaModel';
+import { ContactModel } from '../models/ContactModel';
 
 export interface ICaptchaService {
-  validate(params: CaptchaModel): Promise<boolean>;
+  validate(params: ContactModel): Promise<boolean>;
 }

@@ -13,13 +13,16 @@ export class ContactDto {
 
   ip_address: string;
 
+  captcha_token: string;
+
   constructor(
     full_name = '',
     email_address = '',
     phone_number = '',
     zip_code = '',
     message = '',
-    ip_address = ''
+    ip_address = '',
+    captcha_token = ''
   ) {
     this.full_name = full_name;
     this.email_address = email_address;
@@ -27,5 +30,6 @@ export class ContactDto {
     this.zip_code = zip_code;
     this.message = message;
     this.ip_address = ip_address;
+    this.captcha_token = captcha_token;
   }
 }
