@@ -1,7 +1,7 @@
 'use strict';
 
-import { ContactModel } from "../models/ContactModel";
+import { ContactModel } from '../models/ContactModel';
 
 export interface IContactService {
-    submit(params: ContactModel): Promise<boolean>;
+  submit(params: ContactModel): Promise<boolean>;
 }

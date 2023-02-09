@@ -1,31 +1,31 @@
 'use strict';
 
 export class ContactModel {
-    full_name: string;
+  fullName: string;
 
-    email_address: string;
+  emailAddress: string;
 
-    phone_number: string;
+  phoneNumber: string;
 
-    zip_code: string;
+  zipCode: string;
 
-    message: string;
+  message: string;
 
-    ip_address: string;
+  ipAddress: string;
 
-    constructor(
-        full_name: string = '',
-        email_address: string = '',
-        phone_number: string = '',
-        zip_code: string = '',
-        message: string = '',
-        ip_address: string = '') 
-    {
-        this.full_name = full_name;
-        this.email_address = email_address;
-        this.phone_number = phone_number;
-        this.zip_code = zip_code;
-        this.message = message;
-        this.ip_address = ip_address;
-    }
+  constructor(
+    fullName = '',
+    emailAddress = '',
+    phoneNumber = '',
+    zipCode = '',
+    message = '',
+    ipAddress = ''
+  ) {
+    this.fullName = fullName;
+    this.emailAddress = emailAddress;
+    this.phoneNumber = phoneNumber;
+    this.zipCode = zipCode;
+    this.message = message;
+    this.ipAddress = ipAddress;
+  }
 }

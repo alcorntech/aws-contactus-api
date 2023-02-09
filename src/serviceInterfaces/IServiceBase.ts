@@ -1,21 +1,21 @@
 'use strict';
 
-export interface IServiceBase <T> {
-    getById(databaseName: String, id: Number): Promise<T>;
+export interface IServiceBase<T> {
+  getById(databaseName: string, id: number): Promise<T>;
 
-    getByUuid(databaseName: String, uuid: String): Promise<T>;
+  getByUuid(databaseName: string, uuid: string): Promise<T>;
 
-    getByQuery(databaseName: String, params: Object): Promise<T[]>;
+  getByQuery(databaseName: string, params: unknown): Promise<T[]>;
 
-    getAll(databaseName: String): Promise<T[]>;
+  getAll(databaseName: string): Promise<T[]>;
 
-    countByQuery(databaseName: String, params: Object): Promise<Number>;
+  countByQuery(databaseName: string, params: unknown): Promise<number>;
 
-    count(databaseName: String): Promise<Number>;
+  count(databaseName: string): Promise<number>;
 
-    add(databaseName: String, data: T): Promise<Number>;
+  add(databaseName: string, data: T): Promise<number>;
 
-    update(databaseName: String, data: T): Promise<Number>;
+  update(databaseName: string, data: T): Promise<number>;
 
-    delete(databaseName: String, id: Number): Promise<Boolean>;
+  delete(databaseName: string, id: number): Promise<boolean>;
 }

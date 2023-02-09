@@ -11,7 +11,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
   region: us-east-1
   lambdaHashingVersion: 20201221
@@ -21,25 +21,28 @@ provider:
     shouldStartNameWithService: true
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+    SDK_REGION_AWS: 'us-east-1'
     CONTACT_EMAIL_TO: 'email@domain.com'
     CONTACT_EMAIL_FROM: 'email@domain.com'
-    CONTACT_EMAIL_SUBJECT: 'subject'
-    CONTACT_SMS_TO: 'phone number'
+    CONTACT_EMAIL_SUBJECT: 'Website Contact Form'
+    CONTACT_SMS_TO: 'E.164 Phone Number'
+    GOOGLE_RECAPTCHA_SECRET: 'Google Recaptcha Secret Key'
+    GOOGLE_RECAPTURE_SCORE_MIN: 0.5
   deploymentBucket:
-    name: 'aws-contactus-api'
+    name: 'serverless-lambdas-bucket'
     blockPublicAccess: true
   iamRoleStatements:
-    - Effect: "Allow"
+    - Effect: 'Allow'
       Action:
-        - "SES:SendEmail"
+        - 'SES:SendEmail'
       Resource:
-        - "*"
-    - Effect: "Allow"
+        - '*'
+    - Effect: 'Allow'
       Action:
-        - "SNS:Publish"
+        - 'SNS:Publish'
       Resource:
-        - "*"
-    
+        - '*'
+
 functions:
   app:
     handler: src/app.handler

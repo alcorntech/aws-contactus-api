@@ -1,5 +1,5 @@
 export interface IMapperBase<M, D> {
-    modelToDto(model: M): Promise<D>;
+  modelToDto(model: M): Promise<D>;
 
-    dtoToModel(dto: D): Promise<M>;
+  dtoToModel(dto: D): Promise<M>;
 }

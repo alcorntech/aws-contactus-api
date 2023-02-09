@@ -1,4 +1,4 @@
-image: node:10.15.3
+image: node:18
 
 pipelines:
   branches:
@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: production
           caches:
-           - node
+            - node
           script:
             - export NODE_OPTIONS=--max_old_space_size=4096
             - npm install

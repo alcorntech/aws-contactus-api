@@ -9,20 +9,31 @@ import Constants from '../Constants';
 import { IContactController } from '../controllerInterfaces/IContactController';
 import { IContactService } from '../serviceInterfaces/IContactService';
 import { IContactMapper } from '../mapperInterfaces/IContactMapper';
+import { ICaptchaService } from '../serviceInterfaces/ICaptchaService';
 
 @injectable()
-export class ContactController extends BaseController implements IContactController
+export class ContactController
+  extends BaseController
+  implements IContactController
 {
   constructor(
-    @inject(Constants.Interfaces.EmailService) private emailService: IContactService,
-    @inject(Constants.Interfaces.SmsService) private smsService: IContactService,
-    @inject(Constants.Interfaces.ContactMapper) private contactMapper: IContactMapper,
+    @inject(Constants.Interfaces.EmailService)
+    private emailService: IContactService,
+    @inject(Constants.Interfaces.SmsService)
+    private smsService: IContactService,
+    @inject(Constants.Interfaces.CaptchaService)
+    private captchaService: ICaptchaService,
+    @inject(Constants.Interfaces.ContactMapper)
+    private contactMapper: IContactMapper,
     @inject(Constants.Interfaces.Logger) logger: ILoggerService
   ) {
     super(logger);
   }
 
-  public async submitContactForm(request: Request, response: Response): Promise<void> {
+  public async submitContactForm(
+    request: Request,
+    response: Response
+  ): Promise<void> {
     try {
       const model = await this.contactMapper.dtoToModel({
         full_name: request.body.full_name,
@@ -30,18 +41,31 @@ export class ContactController extends BaseController implements IContactControl
         phone_number: request.body.phone_number,
         zip_code: request.body.zip_code,
         message: request.body.message,
-        ip_address: request.ip
+        ip_address: request.ip,
       });
 
+      // Validate captcha (if applicable)
+      if (process.env.GOOGLE_RECAPTCHA_SECRET) {
+        const isValid = await this.captchaService.validate({
+          token: request.body.captchaToken,
+          ipAddress: request.ip,
+        });
+
+        if (!isValid) {
+          throw Constants.ApiErrors.Forbidden;
+        }
+      }
+
+      // Send notifications
       await Promise.all([
         this.emailService.submit(model),
-        this.smsService.submit(model)
+        this.smsService.submit(model),
       ]);
 
       response.send({
-        success: true
+        success: true,
       });
-    }catch(error) {
+    } catch (error) {
       this.handleError(Constants.ApiErrors.Unexpected, error, response);
     }
   }

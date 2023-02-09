@@ -18,7 +18,7 @@ module.exports = {
   },
   target: 'node',
   externals: {
-    'aws-sdk': 'aws-sdk'
+    'aws-sdk': 'aws-sdk',
   },
   module: {
     rules: [
@@ -40,13 +40,12 @@ module.exports = {
       },
       {
         test: /\.(html|txt)/,
-        type: 'asset/resource'
-      }
+        type: 'asset/resource',
+      },
     ],
   },
-  plugins: [
-  ],
+  plugins: [],
   optimization: {
     minimize: !slsw.lib.webpack.isLocal,
-  }
+  },
 };

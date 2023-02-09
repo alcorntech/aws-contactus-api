@@ -5,19 +5,19 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class Logger implements ILoggerService {
-    public debug(...data: any[]): void {
-        console.debug(data);
-    }
+  public debug(...data: unknown[]): void {
+    console.debug(data);
+  }
 
-    public info(...data: any[]): void {
-        console.info(data);
-    }
+  public info(...data: unknown[]): void {
+    console.info(data);
+  }
 
-    public warn(...data: any[]): void {
-        console.warn(data);
-    }
+  public warn(...data: unknown[]): void {
+    console.warn(data);
+  }
 
-    public error(...data: any[]): void {
-        console.error(data);
-    }
+  public error(...data: unknown[]): void {
+    console.error(data);
+  }
 }

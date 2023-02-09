@@ -4,53 +4,43 @@ import { injectable } from 'inversify';
 import { IContactService } from '../serviceInterfaces/IContactService';
 import { ContactModel } from '../models/ContactModel';
 import { promises as fs } from 'fs';
-import aws from 'aws-sdk';
+import {
+  PublishCommand,
+  PublishCommandInput,
+  SNSClient,
+} from '@aws-sdk/client-sns';
 import templateFile from '../templates/sms_contact.txt';
 
 @injectable()
 export class SmsService implements IContactService {
-    private smsMessage: string;
+  private smsTemplate: string = null;
 
-    constructor() {
+  public async submit(data: ContactModel): Promise<boolean> {
+    if (!this.smsTemplate) {
+      this.smsTemplate = (await fs.readFile(templateFile)).toString();
     }
 
-    public async submit(data: ContactModel): Promise<boolean> {
-        await Promise.all([
-            this.setupAws(),
-            this.populateSmsMessage(data)
-        ]);
+    const params: PublishCommandInput = {
+      Message: this.populateTemplate(this.smsTemplate, data),
+      PhoneNumber: process.env.CONTACT_SMS_TO,
+    };
 
-        const params = {
-            Message: this.smsMessage,
-            PhoneNumber: process.env.CONTACT_SMS_TO
-        };
+    const snsClient: SNSClient = new SNSClient({
+      region: process.env.SDK_REGION_AWS,
+    });
+    const publishCommand: PublishCommand = new PublishCommand(params);
+    await snsClient.send(publishCommand);
 
-        await new aws.SNS({ apiVersion: '2010-03-31' })
-            .publish(params)
-            .promise();
+    return true;
+  }
 
-        return true;
-    }
-
-    private async setupAws() {
-        await aws.config.getCredentials(function(err) {
-            if (err) {
-                throw err;
-            }
-        });
-    }
-
-    private async populateSmsMessage(data) {
-        const template = (await fs.readFile(templateFile)).toString();
-        this.smsMessage = await this.populateTemplate(template, data);
-    }
-
-    private async populateTemplate(template: string, data: ContactModel) {
-        return template.replace(/{{full_name}}/g, data.full_name)
-            .replace(/{{email_address}}/g, data.email_address)
-            .replace(/{{phone_number}}/g, data.phone_number)
-            .replace(/{{zip_code}}/g, data.zip_code)
-            .replace(/{{message}}/g, data.message)
-            .replace(/{{ip_address}}/g, data.ip_address);
-    }
+  private populateTemplate(template: string, data: ContactModel): string {
+    return template
+      .replace(/{{full_name}}/g, data.fullName)
+      .replace(/{{email_address}}/g, data.emailAddress)
+      .replace(/{{phone_number}}/g, data.phoneNumber)
+      .replace(/{{zip_code}}/g, data.zipCode)
+      .replace(/{{message}}/g, data.message)
+      .replace(/{{ip_address}}/g, data.ipAddress);
+  }
 }

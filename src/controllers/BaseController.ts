@@ -7,19 +7,16 @@ import { ILoggerService } from '../serviceInterfaces/ILoggerService';
 import Constants from '../Constants';
 
 @injectable()
-export class BaseController
-{
+export class BaseController {
   constructor(
     @inject(Constants.Interfaces.Logger) protected logger: ILoggerService
-  ) {
-  }
+  ) {}
 
   protected handleError(apiError, error, response: Response) {
     this.logger.error(error);
 
-    let retVal = {
+    const retVal = {
       ...apiError,
-      success: false
     };
 
     response.status(apiError.HttpStatusCode).send(retVal);

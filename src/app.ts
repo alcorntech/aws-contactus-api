@@ -19,19 +19,26 @@ app.use(bodyParser.urlencoded({ limit: '1mb', extended: true }));
 app.set('json spaces', 2);
 
 const logger = container.get<ILoggerService>(Constants.Interfaces.Logger);
-const contactController = container.get<IContactController>(Constants.Interfaces.ContactController);
+const contactController = container.get<IContactController>(
+  Constants.Interfaces.ContactController
+);
 
 app.use('/', (request: Request, _response: Response, next: NextFunction) => {
-    logger.debug(request.url, request.method);
-    next();
+  logger.debug(request.url, request.method);
+  next();
 });
-
 
 // Routes
 
 // Send email
 app.post('/contact', (request: Request, response: Response) => {
-    contactController.submitContactForm(request, response);
+  contactController
+    .submitContactForm(request, response)
+    .catch((err: unknown) => {
+      response
+        .status(Constants.ApiErrors.Unexpected.HttpStatusCode)
+        .json({ message: err });
+    });
 });
 
 module.exports.handler = serverless(app);

@@ -3,5 +3,5 @@
 import { Request, Response } from 'express';
 
 export interface IContactController {
-    submitContactForm(request: Request, response: Response): Promise<void>;
+  submitContactForm(request: Request, response: Response): Promise<void>;
 }
